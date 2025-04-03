@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Code, Database, Server, Rocket } from 'lucide-react';
+import { Code, Database, Server, Rocket, Sparkles, Download } from 'lucide-react';
 import { TechIconGrid } from '@/components/TechStackIcons';
 import DatabaseForm from '@/components/DatabaseForm';
 import ProjectGenerator from '@/components/ProjectGenerator';
@@ -98,29 +98,41 @@ const Index = () => {
   
   return (
     <div className="min-h-screen">
-      <header className="py-8 px-6 text-center mb-8">
-        <h1 className="text-4xl md:text-5xl font-bold mb-3 text-gradient">
-          <span className="text-gradient">DevStart</span>
-        </h1>
-        <p className="text-xl text-gray-700 max-w-2xl mx-auto">
-          Générez rapidement un projet complet en choisissant votre stack technologique préférée
+      <header className="py-8 px-6 text-center mb-12">
+        <div className="inline-block relative mb-2">
+          <span className="absolute inset-0 blur-xl opacity-50 bg-gradient-to-r from-primary via-accent to-primary rounded-full"></span>
+          <h1 className="text-5xl md:text-6xl font-bold relative z-10">
+            <span className="text-gradient">DevStart</span>
+          </h1>
+        </div>
+        <div className="flex items-center justify-center gap-2 mb-4">
+          <Sparkles className="h-5 w-5 text-yellow-500 animate-pulse-slow" />
+          <p className="text-xl font-medium text-gray-700">Créez des projets web complets en un instant</p>
+          <Sparkles className="h-5 w-5 text-yellow-500 animate-pulse-slow" />
+        </div>
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          Sélectionnez votre stack préférée et obtenez un projet prêt à l'emploi
         </p>
       </header>
       
       <main className="container px-6 pb-16 max-w-4xl mx-auto">
-        <div className="glass rounded-xl p-6 mb-8">
-          <div className="flex items-center gap-2 mb-6">
-            <Rocket className="h-6 w-6 text-primary" />
-            <h2 className="text-2xl font-semibold">Sélectionnez votre stack</h2>
+        <div className="glass rounded-xl p-8 mb-10 transform hover:shadow-xl transition-all duration-300">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="p-2 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
+              <Rocket className="h-6 w-6" />
+            </div>
+            <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
+              Sélectionnez votre stack
+            </h2>
           </div>
           
-          <div className="space-y-8 staggered">
+          <div className="space-y-10 staggered">
             <TechIconGrid
               title="Frontend"
               technologies={frontendTechnologies}
               selected={frontend}
               onSelect={setFrontend}
-              icon={<Code className="h-5 w-5 text-primary" />}
+              icon={<Code className="h-5 w-5" />}
             />
             
             <TechIconGrid
@@ -128,7 +140,7 @@ const Index = () => {
               technologies={backendTechnologies}
               selected={backend}
               onSelect={setBackend}
-              icon={<Server className="h-5 w-5 text-primary" />}
+              icon={<Server className="h-5 w-5" />}
             />
             
             <TechIconGrid
@@ -136,14 +148,14 @@ const Index = () => {
               technologies={databaseTechnologies}
               selected={database}
               onSelect={setDatabase}
-              icon={<Database className="h-5 w-5 text-primary" />}
+              icon={<Database className="h-5 w-5" />}
             />
             
-            <div className="flex justify-end">
+            <div className="flex justify-end pt-4">
               <Button
                 onClick={handleNextStep}
                 disabled={!hasSelectedAllTechnologies}
-                className="bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity"
+                className="bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-all duration-300 font-semibold py-6 px-8 text-lg rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1"
               >
                 Configurer la base de données
               </Button>
@@ -152,13 +164,15 @@ const Index = () => {
         </div>
         
         {showDbForm && (
-          <DatabaseForm
-            dbType={database}
-            formData={dbFormData}
-            onFormChange={handleDbFormChange}
-            onSubmit={handleGenerateProject}
-            isValid={isDbFormValid()}
-          />
+          <div className="animate-fadeIn">
+            <DatabaseForm
+              dbType={database}
+              formData={dbFormData}
+              onFormChange={handleDbFormChange}
+              onSubmit={handleGenerateProject}
+              isValid={isDbFormValid()}
+            />
+          </div>
         )}
         
         <ProjectGenerator
@@ -169,8 +183,10 @@ const Index = () => {
         />
       </main>
       
-      <footer className="py-6 text-center text-sm text-gray-500">
-        <p>© 2025 DevStart - Génération rapide de projets web</p>
+      <footer className="py-8 text-center">
+        <div className="gradient-border inline-block px-4 py-2">
+          <p className="text-sm text-gray-600">© 2025 DevStart - Génération rapide de projets web</p>
+        </div>
       </footer>
     </div>
   );
