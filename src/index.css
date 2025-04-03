@@ -115,6 +115,15 @@
     left: 130%;
     transition: left 0.7s ease-in-out;
   }
+
+  .perspective {
+    transform: perspective(1000px) rotateX(5deg);
+    transition: transform 0.5s ease-out;
+  }
+
+  .perspective:hover {
+    transform: perspective(1000px) rotateX(0deg);
+  }
 }
 
 @keyframes fadeIn {
